@@ -1,0 +1,6 @@
+$userid =  $_SESSION["userid"];
+
+//tiap gambar
+if($userid==$userid_gambar){
+    echo 'edit';
+}

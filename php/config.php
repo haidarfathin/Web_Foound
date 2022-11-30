@@ -10,7 +10,7 @@
 
     // function edit_id($kode_barang){
     //     $queryWithId = mysqli_query($this->conn, "SELECT * FROM lost WHERE id='$kode_barang'");
-    //     while($row_barang = mysqli_fetch_array($queryWithId)){
+    //     while($ro    w_barang = mysqli_fetch_array($queryWithId)){
     //         $hasil_barang[] = $row_barang;
     //     }
     //     return $hasil_barang;
