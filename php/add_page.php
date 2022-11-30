@@ -33,10 +33,10 @@
                 <td>Kontak</td>
                 <td><input type="text" name="kontak"></input></td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Gambar</td>
                 <td><input type="file" name="gambar"></input></td>
-            </tr>
+            </tr> -->
             <tr>
                 <td></td>
                 <td><input type="submit" value="Simpan" name="submit">

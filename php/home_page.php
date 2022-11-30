@@ -40,20 +40,20 @@ include "getdata.php";
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <h3>Lost</h3>
+                <h3>Found</h3>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <h3>Lost</h3>
+                <h3>Profile</h3>
             </a>
         </li>
     </ul>
-    <a href="add_page.php"><button type="button" class="btn btn-primary">Tambah</button></a>
+    <a href="add_page.php"><button type="button" class="btn btn-primary">Tambah</button></a><br>
     <?php
     foreach ($queryResult as $x) {
     ?>
-        <div class="card">
+        <br><div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
                 <a href="#!">
