@@ -8,12 +8,16 @@
         echo "Koneksi database gagal : ". mysqli_connect_error();
     }
 
-    // function edit_id($kode_barang){
-    //     $queryWithId = mysqli_query($this->conn, "SELECT * FROM lost WHERE id='$kode_barang'");
-    //     while($ro    w_barang = mysqli_fetch_array($queryWithId)){
-    //         $hasil_barang[] = $row_barang;
-    //     }
-    //     return $hasil_barang;
-    // }
-
+    function cek_nama($username,$conn){
+        $username = mysqli_real_escape_string($conn, $username);
+        $query = "SELECT * FROM users WHERE username = '$username'";
+        if( $result = mysqli_query($conn, $query) ) 
+        return mysqli_num_rows($result);
+    }
+    
+    function setNomor($nomor){
+        $potong = substr($nomor, 1);
+        $fnomor = '62'.$potong;
+        return $fnomor;
+    }
 ?>

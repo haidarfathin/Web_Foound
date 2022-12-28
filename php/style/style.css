@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* color-code {
+	yellow: #fdd563
+	ungu:	#444c74
+	black: #252525
+	grey-bg: #e6e6e6
+} */
+
+.card-text,
+.card-title {
+	width: 230px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.card {
+	background-color: #ffffff;
+	width: 300px;
+}
+
+.act-btn {
+	background: #FDD563;
+	display: block;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	text-decoration: none;
+	transition: ease all 0.3s;
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+}
+
+.act-btn:hover {
+	background: #434A75;
+	color: white;
+}
+
+h4 {
+	text-align: center;
+	color: #252525;
+	font-family: 'Poppins', sans-serif;
+	padding-bottom: 10px;
+}
+
+
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+	margin: 0 auto;
+}
+
+.overlay:target {
+	visibility: visible;
+	opacity: 1;
+}
+
+.wrapper {
+	margin: 50px auto;
+	padding: 20px;
+	background: #e7e7e7;
+	border-radius: 5px;
+	width: 30%;
+	position: relative;
+	transition: all 5s ease-in-out;
+}
+
+.wrapper h2 {
+	margin-top: 0;
+	color: #333;
+}
+
+.wrapper .close {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	transition: all 200ms;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+
+.wrapper .close:hover {
+	color: #434A75;
+}
+
+.wrapper .content {
+	max-height: 30%;
+	overflow: auto;
+}
+
+.btn-fly {
+	background-color: #f9f9f9;
+	color: #444c74;
+	font-weight: bold;
+	border-color: #444c74;
+	display: block;
+}
+
+.btn-fly:hover {
+	background-color: #444c74;
+	color: #e6e6e6;
+}
+
+form label {
+	text-transform: uppercase;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+
+input[type=text],
+select,
+textarea {
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 8px;
+	resize: vertical;
+
+}
+
+input[type="datetime-local"] {
+	position: relative;
+	height: 4S0px;
+	border: none;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+
+
+.img-banner {
+	object-fit: cover;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 400px;
+	width: 400px;
+}
+
+.fab-container {
+	position: fixed;
+	left: 15px;
+	top: 15px;
+}
+
+.iconbutton {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	box-shadow: 1px 5px 5px #aaaaaa;
+	background: #444c74;
+}
+
+.iconbutton i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	color: white;
+}
+
+.img-fluid {
+	width: 415px;
+	height: 415px;
+	object-fit: cover;
+}

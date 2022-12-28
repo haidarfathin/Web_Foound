@@ -1,18 +1,20 @@
-<?php 
+<?php
 include "config.php";
-// function read(){
-//     $data = "SELECT nama_barang, area, tanggal, kontak FROM lost";
-//     while($row = $data){
-//         $hasil[] = $row;
-//     }
-//     return $hasil;
-// }
-// // $koneksi->close();
-$queryResult = $conn->query("SELECT * FROM lost");
+$query = $conn->query("SELECT * FROM lost ORDER BY id DESC");
 $hasil = array();
-while($fetchData=$queryResult->fetch_assoc()){
+while ($fetchData = $query->fetch_assoc()) {
     $hasil[] = $fetchData;
 }
-// $data = $queryResult->fetch_assoc();
-// echo json_encode($hasil); -> untuk ke mobile jadiin json dlu
-?>
+
+if (isset($_POST['cari'])) {
+    $keyword = $_POST['keyword'];
+    $query = mysqli_query($conn, "SELECT * FROM lost WHERE 
+                                nama_barang LIKE '%$keyword%' OR
+                                desc_barang LIKE '%$keyword%' OR
+                                area LIKE '%$keyword%'
+                                ORDER BY id DESC");
+    $cari = array();
+    while ($fetchData = $query->fetch_assoc()) {
+        $cari[] = $fetchData;
+    }
+} 
