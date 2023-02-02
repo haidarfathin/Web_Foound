@@ -164,7 +164,7 @@ $id = $_GET['id'];
                         <label>Foto Bukti</label><br>
                         <i style="font-size: 12px;">Bukti berupa foto pemilik bersama barang</i><br>
                         <button type="button" class="btn-warning">
-                            <input type="file" name="foto_bukti" accept="image/*.png,.jpg, .jpeg" required>
+                            <input type="file" name="foto_bukti" accept=".png, .jpg, .jpeg" required>
                         </button>
                         <br><br>
                         <input type="submit" value="Submit" name="submit" class="btn btn-success" style="background-color: #fdd563; border: none; color: black;">

@@ -114,13 +114,13 @@ $usrnm = $_SESSION['name'];
     <div class="container cont-banner">
         <div class="row">
             <div class="col-md-6 img-col">
-                <img src="foto_profil/<?php 
-                    if($data2['foto_profil']==null){
-                        echo 'default.jpg';
-                    } else {
-                        echo $data2['foto_profil'];
-                    }
-                ?>" class="img-banner" style="border-radius: 50%; padding-right:-90px" />
+                <img src="foto_profil/<?php
+                                        if ($data2['foto_profil'] == null) {
+                                            echo 'default.jpg';
+                                        } else {
+                                            echo $data2['foto_profil'];
+                                        }
+                                        ?>" class="img-banner" style="border-radius: 50%; padding-right:-90px" />
             </div>
             <div class="col-md-5" style="overflow: hidden; text-overflow: ellipsis; width:auto;margin-top:10px;">
                 <p style="margin-bottom: -14px;">Profile</p>
@@ -129,6 +129,9 @@ $usrnm = $_SESSION['name'];
                 <i>+<?php echo $data2['nomor'] ?></i><br><br>
                 <a href="update_profile.php?name=<?php echo $usrnm; ?>" style="text-decoration:none;">
                     <button type="button" class="btn btn-dark">Edit Profile</button>
+                </a>
+                <a href="logout.php" style="text-decoration: none;">
+                    <button type="button" class="btn btn-danger" style="margin-left: 20px;">Logout</button>
                 </a>
             </div>
         </div>
@@ -143,6 +146,8 @@ $usrnm = $_SESSION['name'];
                     <?php
                     if ($y['returned'] == 0) {
                         echo 'update_page.php?id=' . $y['id'];
+                    } else {
+                        echo 'detail_page.php?id=' . $y['id'];
                     }
                     ?>" style="color: #212529;" title="Klik untuk mengkonfirmasi pengembalian">
                     <div class="card">

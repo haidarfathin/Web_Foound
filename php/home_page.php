@@ -2,7 +2,6 @@
 <?php
 include "getdata.php";
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,8 +63,12 @@ session_start();
       color: #e6e6e6;
     }
 
+    .form-control {
+      border-radius: 20px;
+    }
+
     .form-control:focus {
-      border: none;
+      box-shadow: none;
     }
 
     .nav-link {
@@ -88,7 +91,6 @@ session_start();
         <?php
         if (!isset($_SESSION['name'])) {
           $username = ' ';
-          echo "<script type='text/javascript'>alert('Silahkan login, apabila ingin menambahkan barang')</script>";
         } else {
           $username = $_SESSION['name'];
         }
@@ -106,7 +108,7 @@ session_start();
         </li>';
         }
         if (!isset($_SESSION['name'])) {
-          echo "<a href='../index.php' class='wel-text'>Login dulu yuk</a>";
+          echo "<a href='../masukin.php' class='wel-text'>Login dulu yuk</a>";
         } else {
           welcomeName($username);
         }
@@ -120,44 +122,50 @@ session_start();
     <h2><b>Apa yang hilang ?</b></h1>
       <form action="" method="post">
         <div class="input-group">
-          <input type="search" class="form-control" placeholder="Cari nama, tempat atau deskripsi barang" name="keyword" />
-          <button type="submit" class="btn" name="cari" style="z-index:auto;">Cari</button>
+          <input type="search" class="form-control" placeholder="Cari nama barang" name="keyword" id="keyword" />
         </div>
       </form>
   </div>
-  <div class="row justify-content-md-center" style="margin: 20px 0 0 0;">
+  <div class="row justify-content-md-center" style="margin: 20px 0 0 0;" id="barang">
     <?php
-    foreach ($query as $x) {
-    ?>
-      <div class="col-md-auto">
-        <a href="detail_page.php?id=<?php echo $x['id']; ?>">
-          <div class="card" style="width: 300px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="<?php echo "data_gambar/" . $x['gambar']; ?>" class="img-fluid" />
-              <a href="">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><b><?php echo strtoupper($x['nama_barang']); ?></b></h5>
-              <p class="card-text">
-                <?php echo $x['desc_barang']; ?>
-              </p>
-              <p><b>Tempat:</b> <?php echo $x['area']; ?></p>
-              <!-- <a href="detail_page.php?id=<?php echo $x['id']; ?>"><button type="button" class="btn btn-primary">Edit</button></a> -->
-            </div>
-            <div class="card-footer">
-              <?php
-              $tanggal_nemu = $x['tanggal'];
-              $tanggal_nemu_formatted = date("d-M-Y", strtotime($tanggal_nemu));
-              echo $tanggal_nemu_formatted;
-              ?>
-            </div>
-          </div>
-          <br>
-        </a>
+    if (mysqli_num_rows($query) == 0) { ?>
+      <div class="col-md-auto" style="text-align: center; align-items: center;margin-top:10%;">
+        <p>Belum ada barang yang dilaporkan</p>
       </div>
+      <?php
+    } else {
+      foreach ($query as $x) {
+      ?>
+        <div class="col-md-auto">
+          <a href="detail_page.php?id=<?php echo $x['id']; ?>">
+            <div class="card" style="width: 300px;">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="<?php echo "data_gambar/" . $x['gambar']; ?>" class="img-fluid" />
+                <a href="">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><b><?php echo strtoupper($x['nama_barang']); ?></b></h5>
+                <p class="card-text">
+                  <?php echo $x['desc_barang']; ?>
+                </p>
+                <p><b>Tempat:</b> <?php echo $x['area']; ?></p>
+
+              </div>
+              <div class="card-footer">
+                <?php
+                $tanggal_nemu = $x['tanggal'];
+                $tanggal_nemu_formatted = date("d-M-Y", strtotime($tanggal_nemu));
+                echo $tanggal_nemu_formatted;
+                ?>
+              </div>
+            </div>
+            <br>
+          </a>
+        </div>
     <?php
+      }
     }
     ?>
   </div>
@@ -198,5 +206,22 @@ session_start();
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var keyword = document.getElementById('keyword');
+  var barang = document.getElementById('barang');
+
+  keyword.addEventListener('keyup', function() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        barang.innerHTML = xhr.responseText;
+      }
+    }
+
+    xhr.open('GET', 'ajax/display_search.php?keyword=' + keyword.value, true);
+    xhr.send();
+  });
+</script>
 
 </html>

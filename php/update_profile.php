@@ -4,30 +4,6 @@ $usrnm = $_GET['name'];
 $result = mysqli_query($conn, "SELECT * FROM users WHERE username='$usrnm'");
 $data = $result->fetch_assoc();
 
-function generateName($usrnm)
-{
-    date_default_timezone_set('Asia/Jakarta');
-    $extensionImg = pathinfo($_FILES["foto_profil"]["name"], PATHINFO_EXTENSION);
-    $nama_gambar = "profil-" . $usrnm . "." . $extensionImg;
-    return $nama_gambar;
-}
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $nama_lengkap = $_POST['nama_lengkap'];
-    $nomor = $_POST['nomor'];
-    $fnomor = setNomor($nomor);
-    $file_tmp = $_FILES['foto_profil']['tmp_name'];
-    $gambar = generateName($usrnm);
-    move_uploaded_file($file_tmp, 'foto_profil/' . $gambar);
-    $query = $query = mysqli_query($conn, "UPDATE users SET nama_lengkap='$nama_lengkap', nomor='$fnomor', foto_profil='$gambar' WHERE username='$name'");
-    if ($query) {
-        header('Location: profile_page.php');
-    } else {
-        echo "<script type='text/javascript'>alert('Gagal mengupload gambar, koneksi terganggu')</script>";
-    }
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -173,16 +149,18 @@ if (isset($_POST['submit'])) {
             <h4><b>Update Profile <?php echo ucwords($usrnm); ?></b></h4><br>
             <div class="content">
                 <div class="float-page">
-                    <form action="" id="additem" method="POST" enctype="multipart/form-data">
+                    <form action="updateprofil.php" id="additem" method="POST" enctype="multipart/form-data">
                         <input type="hidden" value="<?php $usrnm = $_GET['name'];
                                                     echo $usrnm; ?>" name="name">
                         <label>Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" value="<?php echo ucwords($data['nama_lengkap']) ?>" required>
                         <label>Nomor Whatsapp</label>
-                        <input type="text" class="input" placeholder="No.Whatsapp" name="nomor" value="<?php echo $data['nomor'] ?>" required />
+                        <input type="text" class="input" placeholder="<?php echo $data['nomor'] ?>" name="nomor" />
+                        <input type="hidden" class="input" placeholder="No.Whatsapp" name="nomorAsli" value="<?php echo $data['nomor'] ?>" />
                         <label>Foto Profile</label><br>
+                        <input type="hidden" value="<?php echo $data['foto_profil'] ?>" name="profil_old">
                         <button type="button" class="btn-warning">
-                            <input type="file" name="foto_profil" accept="image/*.png,.jpg, .jpeg" required >
+                            <input type="file" name="foto_profil" accept="image/*.png,.jpg,.jpeg" >
                         </button>
                         <br><br>
                         <input type="submit" value="Submit" name="submit" class="btn btn-success" style="background-color: #fdd563; border: none; color: black;">

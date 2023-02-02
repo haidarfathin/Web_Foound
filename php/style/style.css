@@ -15,6 +15,12 @@
 	white-space: nowrap;
 }
 
+.img-fluid {
+	width: 400px;
+	height: 300px;
+	object-fit: cover;
+  }
+
 .card {
 	background-color: #ffffff;
 	width: 300px;

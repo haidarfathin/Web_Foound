@@ -13,6 +13,7 @@ $data = $result->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title><?php echo strtoupper($data['nama_barang']); ?> | Details page</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -108,8 +109,91 @@ $data = $result->fetch_assoc();
             background: #fdd563;
 
         }
+
         .re {
             margin-bottom: 3px;
+        }
+
+        /* untuk modal */
+        #img-bukti {
+            width: 60%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #img-bukti:hover {
+            opacity: 0.7;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 40%;
+            max-width: 700px;
+        }
+
+        .modal-content {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -140,8 +224,7 @@ $data = $result->fetch_assoc();
                         <p class='re'>Nama Pemilik : " . $data['nama_pemilik'] . "</p>
                         <p class='re'>Status : " . $data['status_pemilik'] . "</p>
                         <p class='re'>Kelas : " . $data['kelas'] . "</p>
-                        <img src='foto_bukti/" . $data['foto_bukti'] . "' style='width: 40%;'/><br>
-                        
+                        <img src='foto_bukti/" . $data['foto_bukti'] . "' id='img-bukti'/><br>
                         ";
                 }
                 ?>
@@ -156,6 +239,28 @@ $data = $result->fetch_assoc();
             </div>
         </div>
     </div>
+
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        var modal = document.getElementById('myModal');
+        var img = document.getElementById('img-bukti');
+        var modalImg = document.getElementById("img01");
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
